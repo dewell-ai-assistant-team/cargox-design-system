@@ -12,7 +12,11 @@ test("component stylesheet avoids global selectors and reset rules", async () =>
   assert.doesNotMatch(css, /(^|\n)\s*(?:html|body|\*)\s*[,\{]/);
   assert.doesNotMatch(css, /\b(?:margin|padding|box-sizing)\s*:\s*0\s*;\s*\/\* reset/i);
   assert.match(css, /\.cx-button/);
+  assert.match(css, /\.cx-icon-button/);
+  assert.match(css, /\.cx-split-button/);
   assert.match(css, /\.cx-data-table/);
+  assert.doesNotMatch(css, /!important/);
+  assert.doesNotMatch(css, /(^|\n)\s*button(?:\s|,|\{|:)/);
 });
 
 test("component dimensions match the Figma size contracts", async () => {
@@ -23,6 +27,9 @@ test("component dimensions match the Figma size contracts", async () => {
     ["cx-button--base", "32px"],
     ["cx-button--medium-large", "36px"],
     ["cx-button--large", "40px"],
+    ["cx-icon-button", "24px"],
+    ["cx-split-button--lg \\.cx-split-button__action", "32px"],
+    ["cx-split-button--sm \\.cx-split-button__action", "24px"],
     ["cx-input--small", "28px"],
     ["cx-input--medium", "32px"],
     ["cx-input--large", "36px"],

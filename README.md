@@ -1,8 +1,8 @@
 # @cargox/design-system
 
 CargoX 的 React + TypeScript 设计系统包。它把 Figma Components Gallery 的
-tokens 与可复用控件抽成独立发布单元，当前包含 Button、Input、Checkbox、
-Switch、Badge、Pagination、Select、SelectTrigger 和泛型 DataTable。
+tokens 与可复用控件抽成独立发布单元，当前包含 Button、IconButton、SplitButton、
+Input、Checkbox、Switch、Badge、Pagination、Select、SelectTrigger 和泛型 DataTable。
 
 ## 安装与样式隔离
 
@@ -35,6 +35,52 @@ export function Screen() {
   );
 }
 ```
+
+### IconButton
+
+IconButton 只接收 `icon`，不使用 `children`。每个按钮必须通过 `aria-label` 或
+`aria-labelledby` 提供可访问名称：
+
+```tsx
+import { IconButton } from "@cargox/design-system";
+
+<IconButton aria-label="刷新" icon={<RefreshIcon />} />
+<IconButton
+  aria-labelledby="settings-label"
+  icon={<SettingsIcon />}
+  variant="regular-icon"
+/>
+```
+
+### SplitButton
+
+SplitButton 只提供组合按钮，不创建菜单、portal、选项或打开状态。宿主负责菜单的
+渲染、定位和交互，并把 `aria-haspopup` 与 `aria-expanded` 传给 Trigger：
+
+```tsx
+import {
+  SplitButton,
+  SplitButtonAction,
+  SplitButtonTrigger,
+} from "@cargox/design-system";
+
+<SplitButton disabled={saving} size="lg" variant="fill">
+  <SplitButtonAction leadingIcon={<SaveIcon />} onClick={save}>
+    保存
+  </SplitButtonAction>
+  <SplitButtonTrigger
+    aria-expanded={menuOpen}
+    aria-haspopup="menu"
+    aria-label="打开保存选项"
+    onClick={() => setMenuOpen((open) => !open)}
+  />
+</SplitButton>
+{menuOpen ? <SaveOptionsMenu /> : null}
+```
+
+`SplitButtonTrigger` 与 IconButton 一样，必须使用 `aria-label` 或
+`aria-labelledby` 二选一提供可访问名称。组合级 `disabled` 会传播到两个原生
+button，同时子按钮仍可单独禁用。
 
 ### Select
 

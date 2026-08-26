@@ -15,7 +15,7 @@ export type CxButtonCanonicalSize =
   | "large";
 
 /** CargoX 按钮视觉尺寸，保留独立库旧别名以便渐进迁移。 */
-export type CxButtonSize = CxButtonCanonicalSize | "mediumLarge" | "lg";
+export type CxButtonSize = CxButtonCanonicalSize | "mediumLarge" | "ml" | "lg";
 
 /** fsense 基线使用的 CargoX 按钮语义样式。 */
 export type CxButtonCanonicalVariant =
@@ -44,6 +44,7 @@ const buttonSizeClass: Record<CxButtonSize, CxButtonCanonicalSize> = {
   "medium-large": "medium-large",
   large: "large",
   mediumLarge: "medium-large",
+  ml: "medium-large",
   lg: "large",
 };
 
