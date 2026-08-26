@@ -26,6 +26,9 @@ test("component dimensions match the Figma size contracts", async () => {
     ["cx-input--small", "28px"],
     ["cx-input--medium", "32px"],
     ["cx-input--large", "36px"],
+    ["cx-select-trigger--small", "28px"],
+    ["cx-select-trigger--medium", "32px"],
+    ["cx-select-trigger--large", "36px"],
   ] as const) {
     assert.match(css, new RegExp(`\\.${selector}[^\\{]*\\{[\\s\\S]*?height: ${height};`));
   }

@@ -1,5 +1,7 @@
 .cx-button,
 .cx-input,
+.cx-select,
+.cx-select-trigger,
 .cx-checkbox,
 .cx-switch,
 .cx-badge,
@@ -30,6 +32,7 @@
 
 .cx-button:focus-visible,
 .cx-input:focus-visible,
+.cx-select-trigger:focus-visible,
 .cx-checkbox:focus-visible,
 .cx-switch:focus-visible,
 .cx-pagination__nav-button:focus-visible,
@@ -164,6 +167,72 @@
   display: inline-flex;
   flex: 0 0 auto;
   line-height: 1;
+}
+
+.cx-select {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.cx-select-trigger {
+  align-items: center;
+  appearance: none;
+  background: var(--cx-background-inputs-default);
+  border: 1px solid var(--cx-border-tertiary);
+  border-radius: var(--cx-radius-rounded-sm);
+  color: var(--cx-content-body-primary);
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: var(--cx-typography-font-weight-regular);
+  gap: var(--cx-space-size-4);
+  min-width: 1px;
+  outline: 0;
+  text-align: left;
+}
+
+.cx-select-trigger--small {
+  height: 28px;
+  padding: 6px var(--cx-space-size-8);
+  font-size: var(--cx-typography-font-size-200);
+  line-height: var(--cx-typography-line-space-200);
+}
+
+.cx-select-trigger--medium {
+  height: 32px;
+  padding: 6px var(--cx-space-size-10);
+  font-size: var(--cx-typography-font-size-300);
+  line-height: var(--cx-typography-line-space-300);
+}
+
+.cx-select-trigger--large {
+  height: 36px;
+  padding: var(--cx-space-size-8) var(--cx-space-size-12);
+  font-size: var(--cx-typography-font-size-300);
+  line-height: var(--cx-typography-line-space-300);
+}
+
+.cx-select-trigger--default:hover:not(:disabled) {
+  border-color: var(--cx-border-secondary);
+}
+
+.cx-select-trigger--default:focus,
+.cx-select-trigger--default:focus-visible {
+  border-color: var(--cx-border-extensions-info);
+}
+
+.cx-select-trigger--error,
+.cx-select-trigger--error:hover,
+.cx-select-trigger--error:active,
+.cx-select-trigger--error:focus,
+.cx-select-trigger--error:focus-visible {
+  border-color: var(--cx-content-extensions-red);
+}
+
+.cx-select-trigger--unavailable,
+.cx-select-trigger:disabled {
+  background: var(--cx-background-inputs-disable);
+  color: var(--cx-content-body-tips);
+  cursor: not-allowed;
 }
 
 .cx-input {

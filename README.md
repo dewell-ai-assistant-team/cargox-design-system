@@ -2,7 +2,7 @@
 
 CargoX 的 React + TypeScript 设计系统包。它把 Figma Components Gallery 的
 tokens 与可复用控件抽成独立发布单元，当前包含 Button、Input、Checkbox、
-Switch、Badge、Pagination 和泛型 DataTable。
+Switch、Badge、Pagination、Select、SelectTrigger 和泛型 DataTable。
 
 ## 安装与样式隔离
 
@@ -35,6 +35,62 @@ export function Screen() {
   );
 }
 ```
+
+### Select
+
+Select 只提供组合与 blur 边界；业务宿主控制 `open`、`value`、`options`、菜单和
+选择行为：
+
+```tsx
+import { useState } from "react";
+import { Select, SelectTrigger } from "@cargox/design-system";
+
+const options = ["海运", "空运"];
+
+export function TransportTypeField() {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(options[0]);
+
+  return (
+    <Select
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          setOpen(false);
+        }
+      }}
+    >
+      <SelectTrigger
+        aria-expanded={open}
+        aria-haspopup="listbox"
+        onClick={() => setOpen((current) => !current)}
+      >
+        {value}
+      </SelectTrigger>
+      {open ? (
+        <div role="listbox">
+          {options.map((option) => (
+            <button
+              key={option}
+              onClick={() => {
+                setValue(option);
+                setOpen(false);
+              }}
+              role="option"
+              aria-selected={option === value}
+              type="button"
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+      ) : null}
+    </Select>
+  );
+}
+```
+
+组件不拥有业务 `options`、`open` 或 `value`，也不渲染 portal；宿主可以按页面需要
+组合菜单、blur 和业务同步逻辑。
 
 所有 CSS 类都使用 `cx-` 前缀，token 只声明在 `.cx-theme` 或
 `[data-cx-theme]` 范围内；包不写 `:root`、全局元素选择器或 reset。每个
