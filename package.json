@@ -1,10 +1,10 @@
 {
   "name": "@cargox/design-system",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "CargoX design tokens and reusable React components.",
   "type": "module",
   "sideEffects": ["dist/styles.css"],
-  "files": ["dist", "docs", "README.md", "LICENSE", "figma-token-manifest.json"],
+  "files": ["dist", "docs", "scripts", "README.md", "LICENSE", "figma-token-manifest.json"],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -20,7 +20,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
-    "build": "vite build && tsc -p tsconfig.build.json",
+    "build": "vite build && tsc -p tsconfig.build.json && node scripts/verify-dist.mjs",
     "pack:dry": "npm pack --dry-run",
     "prepare": "npm run build"
   },
