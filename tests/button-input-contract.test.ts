@@ -25,6 +25,8 @@ test("Button exposes fsense values and normalizes legacy aliases", async () => {
   assert.match(source, /`cx-button--\$\{normalizedSize\}`/);
   assert.match(source, /`cx-button--\$\{normalizedVariant\}`/);
   assert.match(source, /`cx-button--align-\$\{normalizedAlign\}`/);
+  assert.match(source, /\{children\}/);
+  assert.doesNotMatch(source, /cx-button__label/);
 
   for (const legacyClass of [
     "mediumLarge",
@@ -75,4 +77,5 @@ test("Button and Input CSS retain fsense baseline spacing and state values", asy
   assert.match(css, /\.cx-input--unavailable\s*\{/);
   assert.match(css, /\.cx-input--read-only\s*\{/);
   assert.match(css, /\.cx-input\.cx-input--error/);
+  assert.match(css, /\.cx-input\s*\{[\s\S]*?border: 1px solid var\(--cx-border-tertiary\);/);
 });

@@ -42,6 +42,23 @@ export function Screen() {
 自己的主题容器上覆盖 `--cx-*`，而 fsense 的现有 CSS 和组件不会被这个包
 反向改写。
 
+### Tailwind v4 导入顺序与 cascade
+
+如果宿主使用 Tailwind v4，请先导入 design-system 样式，再导入首行包含
+`@import "tailwindcss"` 的宿主样式：
+
+```tsx
+import "@cargox/design-system/styles.css";
+import "./index.css";
+```
+
+design-system 会先声明完整层顺序
+`theme, base, components, cargox-tokens, cargox-components, utilities`。
+这样 Tailwind 的 base/components 位于 CargoX token/component 层之前，Tailwind
+utilities（例如 `w-*`、`h-*`、`justify-*`、`p-*`）可以覆盖组件布局；宿主未分层
+的 fsense 页面规则也可以组合覆盖布局。这个兼容约定依赖上述导入顺序，不宣称
+任意导入顺序都具有相同结果。
+
 ## Tokens
 
 `figma-token-manifest.json` 保留 Figma 的 slash/dot 原始命名、值和来源节点，

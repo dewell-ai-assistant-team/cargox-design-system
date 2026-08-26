@@ -126,7 +126,7 @@ export const Button = forwardRef<HTMLButtonElement, CxButtonProps>(
         type={type}
       >
         {leadingIcon ? <span className="cx-button__icon">{leadingIcon}</span> : null}
-        <span className="cx-button__label">{children}</span>
+        {children}
         {trailingIcon ? <span className="cx-button__icon">{trailingIcon}</span> : null}
       </button>
     );

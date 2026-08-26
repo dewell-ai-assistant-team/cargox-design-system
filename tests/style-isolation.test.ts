@@ -32,3 +32,29 @@ test("component dimensions match the Figma size contracts", async () => {
   assert.match(css, /\.cx-pagination[^\{]*\{[\s\S]*?height: var\(--cx-component-pagination-height\);/);
   assert.match(css, /\.cx-pagination__page-button[^\{]*,[\s\S]*?height: 22px;/);
 });
+
+test("Switch icon dimensions stay pixel-based at both sizes", async () => {
+  const css = await readFile(resolve(packageDirectory, "src/styles/components.css"), "utf8");
+
+  assert.match(
+    css,
+    /\.cx-switch__icon\s*\{\s*display: block;\s*height: 20px;\s*width: 40px;\s*\}/,
+  );
+  assert.match(
+    css,
+    /\.cx-switch--compact \.cx-switch__icon\s*\{\s*height: 16px;\s*width: 32px;\s*\}/,
+  );
+  assert.doesNotMatch(css, /\.cx-switch__icon[^}]*\b(?:height|width):\s*100%;/);
+});
+
+test("styles.css declares the Tailwind v4 and CargoX layer contract", async () => {
+  const css = await readFile(resolve(packageDirectory, "src/styles/styles.css"), "utf8");
+
+  assert.match(
+    css,
+    /@layer\s+theme,\s*base,\s*components,\s*cargox-tokens,\s*cargox-components,\s*utilities\s*;/,
+  );
+  assert.match(css, /@import "\.\/tokens\.css" layer\(cargox-tokens\);/);
+  assert.match(css, /@import "\.\/components\.css" layer\(cargox-components\);/);
+  assert.match(css, /@import "\.\/fsense-compat\.css" layer\(cargox-tokens\);/);
+});

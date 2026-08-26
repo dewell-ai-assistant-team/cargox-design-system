@@ -341,8 +341,13 @@
 
 .cx-switch__icon {
   display: block;
-  height: 100%;
-  width: 100%;
+  height: 20px;
+  width: 40px;
+}
+
+.cx-switch--compact .cx-switch__icon {
+  height: 16px;
+  width: 32px;
 }
 
 .cx-badge {

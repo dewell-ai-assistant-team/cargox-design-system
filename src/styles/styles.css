@@ -1,3 +1,10 @@
-@import "./tokens.css";
-@import "./components.css";
-@import "./fsense-compat.css";
+/*
+ * Tailwind v4's host stylesheet is imported after this entry point. Declare
+ * the shared layer order first so Tailwind's base/components stay below the
+ * CargoX component contract while utilities remain able to override layout.
+ */
+@layer theme, base, components, cargox-tokens, cargox-components, utilities;
+
+@import "./tokens.css" layer(cargox-tokens);
+@import "./components.css" layer(cargox-components);
+@import "./fsense-compat.css" layer(cargox-tokens);
