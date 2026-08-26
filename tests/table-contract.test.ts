@@ -49,5 +49,14 @@ test("DataTable source contains the generic interaction boundaries", async () =>
   ]) {
     assert.match(source, new RegExp(requiredSource));
   }
+  for (const iconName of [
+    "sort-rest.svg",
+    "sort-up.svg",
+    "columns-more-vertical.svg",
+    "columns-action-freeze.svg",
+  ]) {
+    assert.match(source, new RegExp(iconName.replace(".", "\\.")));
+  }
+  assert.doesNotMatch(source, /[▲▼↕⋮]/);
   assert.doesNotMatch(source, /import\s+.*DocRunRecordRow|localStorage/);
 });

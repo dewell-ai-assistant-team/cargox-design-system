@@ -13,6 +13,20 @@ import {
 import { Checkbox } from "./Checkbox";
 import { cx } from "../utils";
 
+const sortRestIcon = new URL(
+  "../assets/icons/sort-rest.svg",
+  import.meta.url,
+).href;
+const sortUpIcon = new URL("../assets/icons/sort-up.svg", import.meta.url).href;
+const columnsMoreVerticalIcon = new URL(
+  "../assets/icons/columns-more-vertical.svg",
+  import.meta.url,
+).href;
+const columnsActionFreezeIcon = new URL(
+  "../assets/icons/columns-action-freeze.svg",
+  import.meta.url,
+).href;
+
 /** Figma Table 的表头高度。 */
 export const DATA_TABLE_HEADER_HEIGHT = 44;
 
@@ -545,6 +559,7 @@ export function DataTable<TData>({
               {columnLayoutList.map((columnLayout) => {
                 const { column } = columnLayout;
                 const isActiveSort = currentSort?.id === column.id;
+                const sortDirection = isActiveSort ? currentSort?.direction : undefined;
                 const ariaSort = isActiveSort
                   ? currentSort.direction === "asc"
                     ? "ascending"
@@ -576,13 +591,14 @@ export function DataTable<TData>({
                             className={cx(
                               "cx-data-table__sort-icon",
                               isActiveSort && "cx-data-table__sort-icon--active",
+                              sortDirection === "desc" &&
+                                "cx-data-table__sort-icon--descending",
                             )}
                           >
-                            {isActiveSort
-                              ? currentSort.direction === "asc"
-                                ? "▲"
-                                : "▼"
-                              : "↕"}
+                            <img
+                              alt=""
+                              src={isActiveSort ? sortUpIcon : sortRestIcon}
+                            />
                           </span>
                         </button>
                       ) : (
@@ -602,7 +618,12 @@ export function DataTable<TData>({
                           }}
                           type="button"
                         >
-                          ⋮
+                          <img
+                            alt=""
+                            aria-hidden="true"
+                            className="cx-data-table__column-action-icon"
+                            src={columnsMoreVerticalIcon}
+                          />
                         </button>
                       ) : null}
                     </span>
@@ -696,6 +717,12 @@ export function DataTable<TData>({
             role="menuitem"
             type="button"
           >
+            <img
+              alt=""
+              aria-hidden="true"
+              className="cx-data-table__column-menu-icon"
+              src={columnsActionFreezeIcon}
+            />
             {frozenColumnIds.includes(columnMenuState.columnId) ? "取消冻结" : "冻结列"}
           </button>
           <button

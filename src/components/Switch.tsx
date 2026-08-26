@@ -1,11 +1,25 @@
 import {
   forwardRef,
+  useState,
   type ButtonHTMLAttributes,
+  type MouseEvent,
   type ReactNode,
 } from "react";
-import * as React from "react";
 
 import { cx } from "../utils";
+
+const switchToggleActiveIcon = new URL(
+  "../assets/icons/switch-toggle-active.svg",
+  import.meta.url,
+).href;
+const switchToggleDisabledIcon = new URL(
+  "../assets/icons/switch-toggle-disabled.svg",
+  import.meta.url,
+).href;
+const switchToggleRestIcon = new URL(
+  "../assets/icons/switch-toggle-rest.svg",
+  import.meta.url,
+).href;
 
 /** CargoX Switch 的尺寸。 */
 export type CxSwitchSize = "default" | "compact";
@@ -43,9 +57,9 @@ export const Switch = forwardRef<HTMLButtonElement, CxSwitchProps>(
     ref,
   ) {
     const [uncontrolledChecked, setUncontrolledChecked] =
-      React.useState(defaultChecked);
+      useState(defaultChecked);
     const checked = controlledChecked ?? uncontrolledChecked;
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
       const nextChecked = !checked;
       if (controlledChecked === undefined) {
         setUncontrolledChecked(nextChecked);
@@ -55,7 +69,11 @@ export const Switch = forwardRef<HTMLButtonElement, CxSwitchProps>(
     };
 
     return (
-      <span
+      <button
+        {...buttonProps}
+        ref={ref}
+        aria-checked={checked}
+        aria-label={buttonProps["aria-label"] ?? (typeof label === "string" ? label : undefined)}
         className={cx(
           "cx-theme",
           "cx-switch",
@@ -64,23 +82,24 @@ export const Switch = forwardRef<HTMLButtonElement, CxSwitchProps>(
           disabled && "cx-switch--disabled",
           className,
         )}
+        disabled={disabled}
+        onClick={handleClick}
+        role="switch"
+        type={type}
       >
-        <button
-          {...buttonProps}
-          ref={ref}
-          aria-checked={checked}
-          aria-label={buttonProps["aria-label"] ?? (typeof label === "string" ? label : undefined)}
-          className="cx-switch__control"
-          disabled={disabled}
-          onClick={handleClick}
-          role="switch"
-          type={type}
+        <img
+          alt=""
+          aria-hidden="true"
+          className="cx-switch__icon"
+          src={
+            disabled
+              ? switchToggleDisabledIcon
+              : checked
+                ? switchToggleActiveIcon
+                : switchToggleRestIcon
+          }
         />
-        <span aria-hidden="true" className="cx-switch__track">
-          <span className="cx-switch__thumb" />
-        </span>
-        {label ? <span className="cx-switch__label">{label}</span> : null}
-      </span>
+      </button>
     );
   },
 );

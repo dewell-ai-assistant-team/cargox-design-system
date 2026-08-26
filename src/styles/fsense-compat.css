@@ -1,0 +1,84 @@
+/*
+ * fsense compatibility aliases.
+ *
+ * The values remain owned by CargoX tokens. These aliases let the validated
+ * Document Station selectors migrate without changing their computed values.
+ */
+.cx-theme,
+[data-cx-theme] {
+  --background-canvas-brand: var(--cx-background-canvas-brand);
+  --background-canvas-neutral: var(--cx-background-canvas-neutral);
+  --background-canvas-primary: var(--cx-background-canvas-primary);
+  --background-canvas-tertiary: var(--cx-background-canvas-tertiary);
+  --background-surface-primary: var(--cx-background-surface-primary);
+  --background-surface-secondary: var(--cx-background-surface-secondary);
+  --background-surface-tertiary: var(--cx-background-surface-tertiary);
+  --background-surface-extension-blue: var(--cx-background-surface-extension-blue);
+  --background-inputs-default: var(--cx-background-inputs-default);
+  --background-inputs-disable: var(--cx-background-inputs-disable);
+  --background-table-headercell-primary: var(--cx-background-table-headercell-primary);
+  --background-table-headercell-secondary: var(--cx-background-table-headercell-secondary);
+  --background-table-listcell-primary: var(--cx-background-table-listcell-primary);
+
+  --brand-50: var(--cx-brand-50);
+  --brand-400: var(--cx-brand-400);
+  --brand-700: var(--cx-brand-700);
+
+  --color-style-hover-state-buttons-brand-style: var(--cx-color-style-hover-state-buttons-brand-style);
+  --color-style-hover-state-buttons-brand-outline: var(--cx-color-style-hover-state-buttons-brand-outline);
+  --color-style-press-state-buttons-brand-style: var(--cx-color-style-press-state-buttons-brand-style);
+  --color-style-press-state-buttons-brand-outline: var(--cx-color-style-press-state-buttons-brand-outline);
+
+  --content-heading-theme: var(--cx-content-heading-theme);
+  --content-heading-primary: var(--cx-content-heading-primary);
+  --content-body-primary: var(--cx-content-body-primary);
+  --content-body-secondary: var(--cx-content-body-secondary);
+  --content-body-tertiary: var(--cx-content-body-tertiary);
+  --content-body-tips: var(--cx-content-body-tips);
+  --content-body-inverse: var(--cx-content-body-inverse);
+  --content-extensions-brand-blue: var(--cx-content-extensions-brand-blue);
+  --content-extensions-red: var(--cx-content-extensions-red);
+
+  --border-primary: var(--cx-border-primary);
+  --border-secondary: var(--cx-border-secondary);
+  --border-tertiary: var(--cx-border-tertiary);
+  --border-extensions-brand: var(--cx-border-extensions-brand);
+  --border-extensions-info: var(--cx-border-extensions-info);
+  --border-extensions-warning: var(--cx-border-extensions-warning);
+  --border-extensions-success: var(--cx-border-extensions-success);
+  --border-extensions-danger: var(--cx-border-extensions-danger);
+
+  --space-2: var(--cx-space-size-2);
+  --space-4: var(--cx-space-size-4);
+  --space-6: var(--cx-space-size-6);
+  --space-8: var(--cx-space-size-8);
+  --space-10: var(--cx-space-size-10);
+  --space-12: var(--cx-space-size-12);
+  --space-16: var(--cx-space-size-16);
+  --space-20: var(--cx-space-size-20);
+  --space-24: var(--cx-space-size-24);
+  --space-32: var(--cx-space-size-32);
+
+  --radius-sm: var(--cx-radius-rounded-sm);
+  --radius-md: var(--cx-radius-rounded-md);
+  --radius-lg: var(--cx-radius-rounded-lg);
+  --radius-pill: var(--cx-radius-rounded-pill);
+
+  --bg-canvas: var(--cx-background-canvas-brand);
+  --surface-primary: var(--cx-background-surface-primary);
+  --surface-secondary: var(--cx-background-surface-secondary);
+  --surface-tertiary: var(--cx-background-surface-tertiary);
+  --surface-brand-soft: var(--cx-background-surface-extension-blue);
+  --border-default: var(--cx-border-secondary);
+  --border-muted: var(--cx-border-tertiary);
+  --text-primary: var(--cx-content-heading-primary);
+  --text-body: var(--cx-content-body-primary);
+  --text-secondary: var(--cx-content-body-secondary);
+  --text-tertiary: var(--cx-content-body-tertiary);
+  --text-tips: var(--cx-content-body-tips);
+  --brand-navy: var(--cx-content-heading-theme);
+  --brand-blue: var(--cx-content-extensions-brand-blue);
+  --brand-blue-deep: var(--cx-brand-700);
+  --state-ex-bg: var(--cx-color-style-error-state-background);
+  --state-ex-text: var(--cx-content-extensions-red);
+}

@@ -10,6 +10,17 @@ Switch、Badge、Pagination 和泛型 DataTable。
 npm install @cargox/design-system
 ```
 
+当前仓库是私有库。fsense 使用 Git submodule 固定源码提交，再通过本地文件依赖
+安装；这样 fsense 只保存独立库的 gitlink，不保存设计系统源码：
+
+```json
+{
+  "dependencies": {
+    "@cargox/design-system": "file:vendor/cargox-design-system"
+  }
+}
+```
+
 入口只导出 React 组件和 token 引用；样式需要显式引入：
 
 ```tsx
@@ -80,12 +91,24 @@ keyboard resize、frozen columns/sticky header、loading/empty/error、toolbar�
 footer 和 `renderCell` slots。列宽和冻结状态建议由宿主持久化，包本身不写入
 浏览器存储。
 
+## fsense 迁移基线
+
+- 组件与样式冲突时，以 fsense `outlook-index` 已验证实现为准。
+- `fsense-compat.css` 在主题作用域内提供旧变量到 `--cx-*` 的映射；不污染
+  `:root`，也不创建第二套 token 值。
+- Button、Input、Checkbox、Switch 与 Pagination 的规范 API 和运行时细节已按
+  fsense 基线对齐；独立库旧属性名只作为渐进兼容输入。
+- `DataTable<TData>` 是通用组件，不替换 fsense 的 `RecordsTable`。后者仍持有
+  业务记录类型、列宽持久化、选择浮层和记录操作。
+
+完整差异记录见 [fsense 基线差异审计](docs/fsense-baseline-audit.md)。
+
 ## 兼容性
 
 - React 与 React DOM 为 peer dependency，兼容 React 19。
 - Vite library build 输出 ESM 和声明文件。
-- 库不替换 fsense 现有 `DesignButton`、`RecordsTable` 等实现；迁移可以按
-  页面逐步进行，并保留原页面的业务状态与请求逻辑。
+- fsense 可通过原组件路径的轻量 adapter 接入本包，避免改动页面业务调用。
+- `RecordsTable` 继续留在 fsense；本包不会接管其请求、持久化或记录操作。
 
 设计来源：Figma file `keekWo6ygLKQQw1eNrQYP5`，Components Gallery `5:778`，
 Button `1561:2075`、Input `147:3584`、Checkbox `95:22`、Switch `268:933`、

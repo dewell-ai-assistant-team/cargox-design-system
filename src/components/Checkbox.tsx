@@ -1,11 +1,17 @@
 import {
   forwardRef,
+  useState,
   type ButtonHTMLAttributes,
+  type MouseEvent,
   type ReactNode,
 } from "react";
-import * as React from "react";
 
 import { cx } from "../utils";
+
+const checkboxCheckmarkIcon = new URL(
+  "../assets/icons/checkbox-checkmark.svg",
+  import.meta.url,
+).href;
 
 /** Checkbox 的受控值变化回调。 */
 export type CxCheckboxChangeHandler = (checked: boolean) => void;
@@ -16,11 +22,15 @@ export interface CxCheckboxProps
   /** 当前是否选中。未传入时组件会根据默认值维护内部状态。 */
   checked?: boolean;
   /** 当前是否为半选状态，通常用于表格表头。 */
+  intermediate?: boolean;
+  /** `intermediate` 的兼容别名。 */
   indeterminate?: boolean;
   /** 非受控模式的初始值。 */
   defaultChecked?: boolean;
   /** 值变化回调。 */
   onCheckedChange?: CxCheckboxChangeHandler;
+  /** fsense 基准回调别名。 */
+  onChange?: () => void;
   /** 右侧标签，可传 ReactNode。 */
   label?: ReactNode;
 }
@@ -33,8 +43,10 @@ export const Checkbox = forwardRef<HTMLButtonElement, CxCheckboxProps>(
       className,
       defaultChecked = false,
       disabled,
+      intermediate = false,
       indeterminate = false,
       label,
+      onChange,
       onCheckedChange,
       onClick,
       type = "button",
@@ -43,46 +55,52 @@ export const Checkbox = forwardRef<HTMLButtonElement, CxCheckboxProps>(
     ref,
   ) {
     const [uncontrolledChecked, setUncontrolledChecked] =
-      React.useState(defaultChecked);
+      useState(defaultChecked);
     const checked = controlledChecked ?? uncontrolledChecked;
+    const isIntermediate = intermediate || indeterminate;
+    const isActive = checked || isIntermediate;
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
       const nextChecked = !checked;
       if (controlledChecked === undefined) {
         setUncontrolledChecked(nextChecked);
       }
+      onChange?.();
       onCheckedChange?.(nextChecked);
       onClick?.(event);
     };
 
     return (
-      <span
+      <button
+        {...buttonProps}
+        ref={ref}
+        aria-checked={isIntermediate ? "mixed" : checked}
+        aria-label={buttonProps["aria-label"] ?? (typeof label === "string" ? label : undefined)}
+        aria-pressed={isActive}
         className={cx(
           "cx-theme",
           "cx-checkbox",
           checked && "cx-checkbox--checked",
-          indeterminate && "cx-checkbox--mixed",
+          isIntermediate && "cx-checkbox--intermediate",
           disabled && "cx-checkbox--disabled",
           className,
         )}
+        disabled={disabled}
+        onClick={handleClick}
+        role="checkbox"
+        type={type}
       >
-        <button
-          {...buttonProps}
-          ref={ref}
-          aria-checked={indeterminate ? "mixed" : checked}
-          aria-label={buttonProps["aria-label"] ?? (typeof label === "string" ? label : undefined)}
-          className="cx-checkbox__control"
-          disabled={disabled}
-          onClick={handleClick}
-          role="checkbox"
-          type={type}
-        />
         <span aria-hidden="true" className="cx-checkbox__box">
-          {indeterminate ? <span className="cx-checkbox__mark">−</span> : null}
-          {!indeterminate && checked ? <span className="cx-checkbox__mark">✓</span> : null}
+          {checked ? (
+            <img
+              alt=""
+              className="cx-checkbox__checkmark"
+              src={checkboxCheckmarkIcon}
+            />
+          ) : null}
+          {isIntermediate ? <span className="cx-checkbox__mark" /> : null}
         </span>
-        {label ? <span className="cx-checkbox__label">{label}</span> : null}
-      </span>
+      </button>
     );
   },
 );

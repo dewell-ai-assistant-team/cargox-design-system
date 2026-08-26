@@ -6,25 +6,70 @@ import {
 
 import { cx } from "../utils";
 
-/** CargoX 按钮的视觉尺寸。 */
-export type CxButtonSize = "xs" | "sm" | "base" | "mediumLarge" | "lg";
+/** fsense 基线使用的 CargoX 按钮视觉尺寸。 */
+export type CxButtonCanonicalSize =
+  | "xs"
+  | "sm"
+  | "base"
+  | "medium-large"
+  | "large";
 
-/** CargoX 按钮的语义样式。 */
-export type CxButtonVariant =
+/** CargoX 按钮视觉尺寸，保留独立库旧别名以便渐进迁移。 */
+export type CxButtonSize = CxButtonCanonicalSize | "mediumLarge" | "lg";
+
+/** fsense 基线使用的 CargoX 按钮语义样式。 */
+export type CxButtonCanonicalVariant =
   | "fill"
-  | "danger"
+  | "danger-fill"
   | "outline"
-  | "brandOutline"
+  | "brand-outline"
   | "text";
 
-/** CargoX 按钮的内容对齐方式。 */
-export type CxButtonAlign = "start" | "center" | "end";
+/** CargoX 按钮语义样式，保留独立库旧别名以便渐进迁移。 */
+export type CxButtonVariant =
+  | CxButtonCanonicalVariant
+  | "danger"
+  | "brandOutline";
+
+/** fsense 基线使用的 CargoX 按钮内容对齐方式。 */
+export type CxButtonCanonicalAlign = "start" | "center";
+
+/** CargoX 按钮内容对齐方式，`end` 是旧独立库别名。 */
+export type CxButtonAlign = CxButtonCanonicalAlign | "end";
+
+const buttonSizeClass: Record<CxButtonSize, CxButtonCanonicalSize> = {
+  xs: "xs",
+  sm: "sm",
+  base: "base",
+  "medium-large": "medium-large",
+  large: "large",
+  mediumLarge: "medium-large",
+  lg: "large",
+};
+
+const buttonVariantClass: Record<CxButtonVariant, CxButtonCanonicalVariant> = {
+  fill: "fill",
+  "danger-fill": "danger-fill",
+  outline: "outline",
+  "brand-outline": "brand-outline",
+  text: "text",
+  danger: "danger-fill",
+  brandOutline: "brand-outline",
+};
+
+const buttonAlignClass: Record<CxButtonAlign, CxButtonCanonicalAlign> = {
+  start: "start",
+  center: "center",
+  // fsense 的 Button 只有 start/center；旧 end 别名归一化到可用的 start 类。
+  end: "start",
+};
 
 /**
  * CargoX Button 的公共属性。
  *
  * 图标插槽接受 ReactNode，因此业务应用可以继续使用自己的图标库，
- * 设计系统不会把图标实现绑定到某个应用。
+ * 设计系统不会把图标实现绑定到某个应用。尺寸、变体和对齐别名会在
+ * 组件内部归一化为 fsense 基线的 `cx-` 类名。
  */
 export interface CxButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -61,6 +106,10 @@ export const Button = forwardRef<HTMLButtonElement, CxButtonProps>(
     },
     ref,
   ) {
+    const normalizedAlign = buttonAlignClass[align];
+    const normalizedSize = buttonSizeClass[size];
+    const normalizedVariant = buttonVariantClass[variant];
+
     return (
       <button
         {...buttonProps}
@@ -68,9 +117,9 @@ export const Button = forwardRef<HTMLButtonElement, CxButtonProps>(
         className={cx(
           "cx-theme",
           "cx-button",
-          `cx-button--${size}`,
-          `cx-button--${variant}`,
-          `cx-button--align-${align}`,
+          `cx-button--${normalizedSize}`,
+          `cx-button--${normalizedVariant}`,
+          `cx-button--align-${normalizedAlign}`,
           buttonProps.disabled && "cx-button--disabled",
           className,
         )}

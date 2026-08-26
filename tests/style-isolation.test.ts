@@ -21,13 +21,14 @@ test("component dimensions match the Figma size contracts", async () => {
     ["cx-button--xs", "24px"],
     ["cx-button--sm", "28px"],
     ["cx-button--base", "32px"],
-    ["cx-button--mediumLarge", "36px"],
-    ["cx-button--lg", "40px"],
-    ["cx-input-shell--small", "28px"],
-    ["cx-input-shell--medium", "32px"],
-    ["cx-input-shell--large", "36px"],
+    ["cx-button--medium-large", "36px"],
+    ["cx-button--large", "40px"],
+    ["cx-input--small", "28px"],
+    ["cx-input--medium", "32px"],
+    ["cx-input--large", "36px"],
   ] as const) {
     assert.match(css, new RegExp(`\\.${selector}[^\\{]*\\{[\\s\\S]*?height: ${height};`));
   }
-  assert.match(css, /\.cx-pagination__button[^\{]*\{[\s\S]*?height: 24px;/);
+  assert.match(css, /\.cx-pagination[^\{]*\{[\s\S]*?height: var\(--cx-component-pagination-height\);/);
+  assert.match(css, /\.cx-pagination__page-button[^\{]*,[\s\S]*?height: 22px;/);
 });
