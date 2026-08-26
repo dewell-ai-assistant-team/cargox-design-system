@@ -1,0 +1,169 @@
+/*
+ * CargoX tokens are deliberately scoped. The package never owns the host
+ * application's document root, so importing this file cannot reset or style
+ * an existing fsense surface.
+ */
+.cx-theme,
+[data-cx-theme] {
+  --cx-background-canvas-brand: #f7f8fb;
+  --cx-background-canvas-neutral: #ffffff;
+  --cx-background-canvas-primary: #fafafa;
+  --cx-background-canvas-tertiary: #f2f2f2;
+  --cx-background-surface-primary: #ffffff;
+  --cx-background-surface-secondary: #f7f7f7;
+  --cx-background-surface-tertiary: #e6e6e6;
+  --cx-background-surface-extension-blue: #e2edfc;
+  --cx-background-inputs-default: #ffffff;
+  --cx-background-inputs-disable: #f7f7f7;
+  --cx-background-table-headercell-primary: #f7f7f7;
+  --cx-background-table-headercell-secondary: #e2e6f0;
+  --cx-background-table-listcell-primary: #ffffff;
+  --cx-background-table-listcell-hover: #f5f8fd;
+  --cx-background-overlay-primary: #ffffff;
+  --cx-background-overlay-scrim: rgb(0 0 0 / 35%);
+
+  --cx-border-primary: #616161;
+  --cx-border-secondary: #d1d1d1;
+  --cx-border-tertiary: #e6e6e6;
+  --cx-border-extensions-brand: #1f54c2;
+  --cx-border-extensions-info: #316ce4;
+  --cx-border-extensions-warning: #eaa300;
+  --cx-border-extensions-urgent: #e05014;
+  --cx-border-extensions-success: #24a681;
+  --cx-border-extensions-danger: #d23f31;
+
+  --cx-content-heading-theme: #132569;
+  --cx-content-heading-primary: #1a1a1a;
+  --cx-content-heading-secondary: #242424;
+  --cx-content-body-primary: #424242;
+  --cx-content-body-secondary: #767676;
+  --cx-content-body-tertiary: #a4a4a4;
+  --cx-content-body-tips: #c6c6c6;
+  --cx-content-body-inverse: #ffffff;
+  /* Figma 历史变量中的 Boby 拼写保留为运行时别名，供审计和渐进迁移。 */
+  --cx-content-boby-primary: var(--cx-content-body-primary);
+  --cx-content-boby-secondary: var(--cx-content-body-secondary);
+  --cx-content-boby-tertiary: var(--cx-content-body-tertiary);
+  --cx-content-boby-tips: var(--cx-content-body-tips);
+  --cx-content-boby-inverse: var(--cx-content-body-inverse);
+  --cx-content-extensions-brand-blue: #1f54c2;
+  --cx-content-extensions-red: #c8313a;
+  --cx-content-extensions-warning: #d08a00;
+  --cx-content-extensions-success: #24a681;
+
+  --cx-brand-50: #f5f8fd;
+  --cx-brand-400: #316ce4;
+  --cx-brand-700: #003897;
+  --cx-new-brand: #1f54c2;
+  --cx-palette-slate-50: #f8fafc;
+  --cx-palette-slate-100: #f1f5f9;
+  --cx-palette-slate-200: #e2e8f0;
+  --cx-palette-slate-300: #d6dce9;
+  --cx-palette-slate-400: #94a3b8;
+  --cx-palette-slate-500: #64748b;
+  --cx-palette-slate-600: #475569;
+  --cx-palette-slate-700: #334155;
+  --cx-palette-slate-800: #1e293b;
+  --cx-palette-slate-900: #0f172a;
+  --cx-palette-blue-50: #eff6ff;
+  --cx-palette-blue-100: #dbeafe;
+  --cx-palette-blue-200: #bfdbfe;
+  --cx-palette-blue-300: #93c5fd;
+  --cx-palette-blue-400: #60a5fa;
+  --cx-palette-blue-500: #3b82f6;
+  --cx-palette-blue-600: #2563eb;
+  --cx-palette-blue-700: #1d4ed8;
+  --cx-palette-blue-800: #1e40af;
+  --cx-palette-blue-900: #1e3a8a;
+  --cx-palette-red-50: #fef2f2;
+  --cx-palette-red-100: #fee2e2;
+  --cx-palette-red-500: #ef4444;
+  --cx-palette-red-700: #b91c1c;
+  --cx-palette-green-50: #ecfdf5;
+  --cx-palette-green-500: #10b981;
+  --cx-palette-green-700: #047857;
+  --cx-palette-amber-50: #fffbeb;
+  --cx-palette-amber-500: #f59e0b;
+  --cx-palette-amber-700: #b45309;
+
+  --cx-space-size-2: 2px;
+  --cx-space-size-4: 4px;
+  --cx-space-size-6: 6px;
+  --cx-space-size-8: 8px;
+  --cx-space-size-10: 10px;
+  --cx-space-size-12: 12px;
+  --cx-space-size-16: 16px;
+  --cx-space-size-20: 20px;
+  --cx-space-size-24: 24px;
+  --cx-space-size-32: 32px;
+  --cx-space-size-40: 40px;
+
+  --cx-typography-font-size-200: 12px;
+  --cx-typography-font-size-300: 14px;
+  --cx-typography-font-size-400: 16px;
+  --cx-typography-font-size-500: 20px;
+  --cx-typography-font-family-sans: Inter, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --cx-typography-font-weight-regular: 400;
+  --cx-typography-font-weight-medium: 500;
+  --cx-typography-font-weight-semi-bold: 600;
+  --cx-typography-line-space-200: 16px;
+  --cx-typography-line-space-300: 20px;
+  --cx-typography-line-space-400: 22px;
+  --cx-typography-letter-space-normal: 0;
+  --cx-typography-letter-space-label: 0.08em;
+
+  --cx-text-style-paragraph-tiny: var(--cx-typography-font-weight-regular) var(--cx-typography-font-size-200) / var(--cx-typography-line-space-200) var(--cx-typography-font-family-sans);
+  --cx-text-style-paragraph-small: var(--cx-typography-font-weight-regular) var(--cx-typography-font-size-300) / var(--cx-typography-line-space-300) var(--cx-typography-font-family-sans);
+  --cx-text-style-paragraph-base: var(--cx-typography-font-weight-regular) var(--cx-typography-font-size-400) / var(--cx-typography-line-space-400) var(--cx-typography-font-family-sans);
+  --cx-text-style-label-tiny: var(--cx-typography-font-weight-medium) var(--cx-typography-font-size-200) / var(--cx-typography-line-space-200) var(--cx-typography-font-family-sans);
+  --cx-text-style-label-small: var(--cx-typography-font-weight-medium) var(--cx-typography-font-size-300) / var(--cx-typography-line-space-300) var(--cx-typography-font-family-sans);
+  --cx-text-style-label-base: var(--cx-typography-font-weight-semi-bold) var(--cx-typography-font-size-300) / var(--cx-typography-line-space-300) var(--cx-typography-font-family-sans);
+  --cx-text-style-heading-small: var(--cx-typography-font-weight-semi-bold) var(--cx-typography-font-size-400) / var(--cx-typography-line-space-400) var(--cx-typography-font-family-sans);
+  --cx-text-style-heading-base: var(--cx-typography-font-weight-semi-bold) var(--cx-typography-font-size-500) / 24px var(--cx-typography-font-family-sans);
+  --cx-text-style-table-header: var(--cx-typography-font-weight-semi-bold) var(--cx-typography-font-size-200) / var(--cx-typography-line-space-200) var(--cx-typography-font-family-sans);
+  --cx-text-style-table-cell: var(--cx-typography-font-weight-regular) var(--cx-typography-font-size-300) / var(--cx-typography-line-space-300) var(--cx-typography-font-family-sans);
+  --cx-text-style-table-cell-link: var(--cx-typography-font-weight-semi-bold) var(--cx-typography-font-size-300) / var(--cx-typography-line-space-300) var(--cx-typography-font-family-sans);
+  --cx-text-style-status-small: var(--cx-typography-font-weight-medium) var(--cx-typography-font-size-200) / var(--cx-typography-line-space-200) var(--cx-typography-font-family-sans);
+
+  --cx-radius-rounded-xs: 2px;
+  --cx-radius-rounded-sm: 4px;
+  --cx-radius-rounded-md: 6px;
+  --cx-radius-rounded-lg: 8px;
+  --cx-radius-rounded-pill: 9999px;
+
+  --cx-color-style-hover-state-buttons-brand-style: #316ce4;
+  --cx-color-style-hover-state-buttons-brand-outline: #f5f8fd;
+  --cx-color-style-press-state-buttons-brand-style: #003897;
+  --cx-color-style-press-state-buttons-brand-outline: #e2edfc;
+  --cx-color-style-hover-state-list-item: #f7f7f7;
+  --cx-color-style-press-state-list-item: #e6e6e6;
+  --cx-color-style-focus-state-border: #316ce4;
+  --cx-color-style-disabled-state-content: #c6c6c6;
+  --cx-color-style-disabled-state-background: #f7f7f7;
+  --cx-color-style-selected-state-background: #f5f8fd;
+  --cx-color-style-selected-state-content: #1f54c2;
+  --cx-color-style-error-state-background: #f9e9ec;
+  --cx-color-style-error-state-content: #c8313a;
+
+  --cx-shadow-surface-small: 0 1px 2px rgb(0 0 0 / 10%);
+  --cx-shadow-surface-medium: 0 0 8px rgb(0 0 0 / 20%);
+  --cx-shadow-overlay-medium: 0 32px 64px rgb(0 0 0 / 24%);
+  --cx-shadow-overlay-small: 0 4px 12px rgb(0 0 0 / 16%);
+  --cx-shadow-table-frame: 0 1px 2px rgb(0 0 0 / 10%);
+  --cx-shadow-focus-control: 0 0 0 2px rgb(49 108 228 / 28%);
+  --cx-shadow-drag-column: 0 4px 12px rgb(0 0 0 / 16%);
+
+  --cx-component-table-header-height: 44px;
+  --cx-component-table-row-height: 40px;
+  --cx-component-table-checkbox-column-width: 44px;
+  --cx-component-table-default-column-width: 200px;
+  --cx-component-table-minimum-column-width: 120px;
+  --cx-component-table-header-padding: 12px;
+  --cx-component-table-row-padding-inline: 12px;
+  --cx-component-table-row-padding-block: 10px;
+  --cx-component-table-frame-radius: 8px;
+  --cx-component-pagination-height: 24px;
+  --cx-component-checkbox-size: 16px;
+  --cx-component-switch-width: 40px;
+  --cx-component-switch-height: 20px;
+}
