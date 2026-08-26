@@ -31,4 +31,8 @@ test("fsense compatibility aliases stay scoped and reference CargoX tokens", asy
     compatibilityCss,
     /--radius-sm:\s*var\(--cx-radius-rounded-sm\)/,
   );
+  assert.match(
+    compatibilityCss,
+    /--content-heading-secondary:\s*var\(--cx-content-heading-secondary\)/,
+  );
 });

@@ -31,6 +31,7 @@
 
   --content-heading-theme: var(--cx-content-heading-theme);
   --content-heading-primary: var(--cx-content-heading-primary);
+  --content-heading-secondary: var(--cx-content-heading-secondary);
   --content-body-primary: var(--cx-content-body-primary);
   --content-body-secondary: var(--cx-content-body-secondary);
   --content-body-tertiary: var(--cx-content-body-tertiary);
