@@ -115,8 +115,8 @@ test("SplitButton CSS covers independent sizes, focus, variants, and disabled st
   assert.match(css, /\.cx-split-button--fill \.cx-split-button__trigger\s*\{[\s\S]*?border-left: 0;/);
   assert.match(css, /\.cx-split-button--fill \.cx-split-button__trigger:hover:not\(:disabled\)[\s\S]*?var\(--cx-brand-400\)/);
   assert.match(css, /\.cx-split-button--fill \.cx-split-button__trigger:active:not\(:disabled\)[\s\S]*?var\(--cx-brand-700\)/);
-  assert.match(css, /\.cx-split-button--outline \.cx-split-button__trigger:hover:not\(:disabled\)[\s\S]*?var\(--cx-brand-50\)/);
-  assert.match(css, /\.cx-split-button--outline \.cx-split-button__trigger:active:not\(:disabled\)[\s\S]*?var\(--cx-background-surface-extension-blue\)/);
+  assert.match(css, /\.cx-split-button--outline \.cx-split-button__trigger:hover:not\(:disabled\)[\s\S]*?var\(--cx-background-surface-secondary\)/);
+  assert.match(css, /\.cx-split-button--outline \.cx-split-button__trigger:active:not\(:disabled\)[\s\S]*?var\(--cx-background-surface-tertiary\)/);
   assert.match(css, /\.cx-split-button--fill[\s\S]*?:disabled[\s\S]*?var\(--cx-background-surface-tertiary\)/);
   assert.match(css, /\.cx-split-button--outline[\s\S]*?:disabled[\s\S]*?var\(--cx-background-surface-secondary\)[\s\S]*?var\(--cx-border-secondary\)/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.cx-icon-button,[\s\S]*?\.cx-split-button__trigger/);

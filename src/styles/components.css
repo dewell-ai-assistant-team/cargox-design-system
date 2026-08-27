@@ -412,12 +412,12 @@
 
 .cx-split-button--outline .cx-split-button__action:hover:not(:disabled),
 .cx-split-button--outline .cx-split-button__trigger:hover:not(:disabled) {
-  background: var(--cx-brand-50);
+  background: var(--cx-background-surface-secondary);
 }
 
 .cx-split-button--outline .cx-split-button__action:active:not(:disabled),
 .cx-split-button--outline .cx-split-button__trigger:active:not(:disabled) {
-  background: var(--cx-background-surface-extension-blue);
+  background: var(--cx-background-surface-tertiary);
 }
 
 .cx-split-button .cx-split-button__action:disabled,
