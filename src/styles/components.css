@@ -254,6 +254,7 @@
 }
 
 .cx-icon-button--regular-icon {
+  background: var(--cx-background-surface-primary);
   color: var(--cx-border-primary);
 }
 

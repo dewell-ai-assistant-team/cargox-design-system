@@ -49,7 +49,7 @@ test("IconButton and Button icon CSS retain exact geometry and state colors", as
   assert.match(css, /\.cx-icon-button__icon > img,[\s\S]*?\.cx-icon-button__icon > svg\s*\{[\s\S]*?height: 100%;[\s\S]*?width: 100%;/);
   assert.match(css, /\.cx-icon-button--brand-icon:hover:not\(:disabled\)[\s\S]*?var\(--cx-brand-50\)/);
   assert.match(css, /\.cx-icon-button--brand-icon:active:not\(:disabled\)[\s\S]*?var\(--cx-background-surface-extension-blue\)/);
-  assert.match(css, /\.cx-icon-button--regular-icon\s*\{[\s\S]*?var\(--cx-border-primary\)/);
+  assert.match(css, /\.cx-icon-button--regular-icon\s*\{[\s\S]*?background: var\(--cx-background-surface-primary\);[\s\S]*?color: var\(--cx-border-primary\);/);
   assert.match(css, /\.cx-icon-button--regular-icon:hover:not\(:disabled\)[\s\S]*?var\(--cx-background-surface-secondary\)/);
   assert.match(css, /\.cx-icon-button--regular-icon:active:not\(:disabled\)[\s\S]*?var\(--cx-background-surface-tertiary\)/);
   assert.match(css, /\.cx-icon-button:disabled[\s\S]*?var\(--cx-background-inputs-disable\)[\s\S]*?var\(--cx-border-tertiary\)[\s\S]*?var\(--cx-content-body-tips\)/);
