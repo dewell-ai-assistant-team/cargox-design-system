@@ -222,6 +222,23 @@ footer 和 `renderCell` slots。列宽和冻结状态建议由宿主持久化，
 
 完整差异记录见 [fsense 基线差异审计](docs/fsense-baseline-audit.md)。
 
+## 发布与 fsense 同步流程
+
+本仓库是组件与 tokens 的唯一源码仓库。不要在 fsense 的
+`outlook-index/vendor/cargox-design-system` submodule 内直接修改源码；该目录只用于
+消费已提交并推送到本仓库的版本。
+
+每次组件或 token 变更按以下顺序执行：
+
+1. 在本仓库修改、测试并更新 package version。
+2. 提交并推送 `main`，创建与 package version 一致的 `v*` tag 和 GitHub Release。
+3. 在 fsense 根目录运行 `just design-system-sync vX.Y.Z`，只更新 submodule gitlink
+   和本地 file dependency。
+4. 在 fsense 运行 `just design-system-check` 和页面回归验证后再提交 fsense 变更。
+
+fsense 的检查 harness 会拒绝 submodule 内的未提交源码修改，从而避免从宿主仓库
+反向维护设计系统。
+
 ## 兼容性
 
 - React 与 React DOM 为 peer dependency，兼容 React 19。
