@@ -8,3 +8,5 @@ export * from "./Pagination";
 export * from "./Select";
 export * from "./SplitButton";
 export * from "./Switch";
+export * from "./FilterButton";
+export * from "./Sortable";

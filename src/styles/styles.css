@@ -8,3 +8,4 @@
 @import "./tokens.css" layer(cargox-tokens);
 @import "./components.css" layer(cargox-components);
 @import "./fsense-compat.css" layer(cargox-tokens);
+@import "./shared-controls.css";
