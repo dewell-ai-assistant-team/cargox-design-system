@@ -50,6 +50,7 @@
 }
 
 .cx-filter__caret {
+  flex: none;
   background: currentColor;
   display: block;
   height: 5.99888px;
@@ -91,6 +92,7 @@
 }
 
 .cx-filter__clear-icon {
+  flex: none;
   background: currentColor;
   display: block;
   height: 8px;

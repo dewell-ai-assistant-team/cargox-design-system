@@ -106,8 +106,8 @@ export function FilterButton<T extends string = string>({
           aria-hidden="true"
           className="cx-filter__caret"
           style={{
-            maskImage: `url(${filterChevronIcon})`,
-            WebkitMaskImage: `url(${filterChevronIcon})`,
+            maskImage: `url("${filterChevronIcon}")`,
+            WebkitMaskImage: `url("${filterChevronIcon}")`,
           }}
         />
       </button>
@@ -123,8 +123,8 @@ export function FilterButton<T extends string = string>({
               aria-hidden="true"
               className="cx-filter__clear-icon"
               style={{
-                maskImage: `url(${filterDismissIcon})`,
-                WebkitMaskImage: `url(${filterDismissIcon})`,
+                maskImage: `url("${filterDismissIcon}")`,
+                WebkitMaskImage: `url("${filterDismissIcon}")`,
               }}
             />
           )}
