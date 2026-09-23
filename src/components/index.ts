@@ -9,4 +9,6 @@ export * from "./Select";
 export * from "./SplitButton";
 export * from "./Switch";
 export * from "./FilterButton";
+export * from "./FilterOptionsDropdown";
+export * from "./DateFilterDropdown";
 export * from "./Sortable";

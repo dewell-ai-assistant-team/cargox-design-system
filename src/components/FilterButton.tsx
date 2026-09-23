@@ -4,15 +4,20 @@ import {
   type ReactNode,
 } from "react";
 
-import { Button } from "./Button";
+import { FilterOptionsDropdown, type FilterOption } from "./FilterOptionsDropdown";
 import { cx } from "../utils";
 
+const filterChevronIcon = new URL(
+  "../assets/icons/filter-chevron.svg",
+  import.meta.url,
+).href;
+const filterDismissIcon = new URL(
+  "../assets/icons/filter-dismiss.svg",
+  import.meta.url,
+).href;
+
 /** 共享筛选菜单选项。value 应保持稳定，以便消费者保存筛选上下文。 */
-export interface FilterOption<T extends string = string> {
-  label: ReactNode;
-  value: T;
-  disabled?: boolean;
-}
+export type { FilterOption } from "./FilterOptionsDropdown";
 
 /** FilterButton 的公共属性。 */
 export interface FilterButtonProps<T extends string = string> {
@@ -64,22 +69,9 @@ export function FilterButton<T extends string = string>({
   const isActive = active ?? selectedSet.size > 0;
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  function handleOptionChange(option: FilterOption<T>) {
-    if (option.disabled) return;
-    if (multiple) {
-      const nextSelectedValues = selectedSet.has(option.value)
-        ? [...selectedSet].filter((selectedValue) => selectedValue !== option.value)
-        : [...selectedSet, option.value];
-      onChange?.(nextSelectedValues[0], nextSelectedValues);
-      return;
-    }
-    onChange?.(option.value, [option.value]);
-    if (open === undefined) setUncontrolledOpen(false);
-  }
-
   return (
     <div
-      className={cx("cx-theme", "cx-filter", className)}
+      className={cx("cx-theme", "cx-filter", isActive && "cx-filter--active", className)}
       onBlur={(event) => {
         if (open === undefined && !event.currentTarget.contains(event.relatedTarget)) {
           setUncontrolledOpen(false);
@@ -95,54 +87,50 @@ export function FilterButton<T extends string = string>({
       }}
       ref={rootRef}
     >
-      <Button
+      <button
         aria-expanded={isOpen}
         aria-haspopup="menu"
         aria-label={ariaLabel}
-        className={cx("cx-filter__trigger", isActive && "cx-filter__trigger--active")}
+        className="cx-filter__trigger"
+        data-active={isActive}
         disabled={disabled}
         onClick={() => {
           if (onToggle) onToggle();
           else setUncontrolledOpen((nextOpen) => !nextOpen);
         }}
         ref={triggerRef}
-        size="sm"
-        trailingIcon={<span aria-hidden="true" className="cx-filter__caret" />}
-        variant="text"
+        type="button"
       >
         <span className="cx-filter__label">{label}</span>
-      </Button>
+        <span
+          aria-hidden="true"
+          className="cx-filter__caret"
+          style={{
+            maskImage: `url(${filterChevronIcon})`,
+            WebkitMaskImage: `url(${filterChevronIcon})`,
+          }}
+        />
+      </button>
       {isActive && onClear ? (
         <button
-          aria-label={`Clear ${typeof label === "string" ? label : "filter"}`}
+          aria-label={`Clear ${typeof label === "string" ? label : "filter"} filter`}
           className="cx-filter__clear"
           onClick={onClear}
           type="button"
         >
-          {clearIcon ?? <span aria-hidden="true">×</span>}
+          {clearIcon ?? (
+            <span
+              aria-hidden="true"
+              className="cx-filter__clear-icon"
+              style={{
+                maskImage: `url(${filterDismissIcon})`,
+                WebkitMaskImage: `url(${filterDismissIcon})`,
+              }}
+            />
+          )}
         </button>
       ) : null}
-      {isOpen && options.length > 0 ? (
-        <div className={cx("cx-filter__menu", menuClassName)} role="menu">
-          {options.map((option) => (
-            <button
-              aria-checked={selectedSet.has(option.value)}
-              className={cx(
-                "cx-filter__option",
-                selectedSet.has(option.value) && "cx-filter__option--selected",
-              )}
-              disabled={option.disabled}
-              key={option.value}
-              onClick={() => handleOptionChange(option)}
-              role={multiple ? "menuitemcheckbox" : "menuitemradio"}
-              type="button"
-            >
-              {multiple ? <span aria-hidden="true" className={cx("cx-filter__checkbox", selectedSet.has(option.value) && "cx-filter__checkbox--checked")}>{selectedSet.has(option.value) ? "✓" : null}</span> : null}
-              <span>{option.label}</span>
-            </button>
-          ))}
-        </div>
-      ) : null}
+      {isOpen && options.length > 0 ? <FilterOptionsDropdown className={menuClassName} multiple={multiple} onChange={(nextValue, nextSelectedValues) => { onChange?.(nextValue, nextSelectedValues); if (!multiple && open === undefined) { setUncontrolledOpen(false); triggerRef.current?.focus({ preventScroll: true }); } }} options={options} selectedValues={[...selectedSet]} /> : null}
     </div>
   );
 }

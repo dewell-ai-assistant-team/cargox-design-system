@@ -1,6 +1,6 @@
 {
   "name": "@cargox/design-system",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "CargoX design tokens and reusable React components.",
   "type": "module",
   "sideEffects": ["dist/styles.css"],

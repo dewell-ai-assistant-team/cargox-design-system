@@ -222,9 +222,13 @@ footer 和 `renderCell` slots。列宽和冻结状态建议由宿主持久化，
 
 完整差异记录见 [fsense 基线差异审计](docs/fsense-baseline-audit.md)。
 
-## 发布与 fsense 同步流程
+## 发布与消费项目同步流程
 
-本仓库是组件与 tokens 的唯一源码仓库。不要在 fsense 的
+本仓库是组件、样式与 tokens 的唯一源码仓库。demo 的
+`frontend-public/vendor/cargox-design-system` 与 fsense 的 submodule 均引用这里的提交。
+新增的 `FilterButton`、`SortableList` 和 `SortableRow` 也从包的统一入口导出。
+
+不要在 fsense 的
 `outlook-index/vendor/cargox-design-system` submodule 内直接修改源码；该目录只用于
 消费已提交并推送到本仓库的版本。
 
