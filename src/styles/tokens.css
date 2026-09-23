@@ -173,6 +173,7 @@
 
   --cx-shadow-surface-small: 0 1px 2px rgb(0 0 0 / 10%);
   --cx-shadow-surface-medium: 0 0 8px rgb(0 0 0 / 20%);
+  --cx-shadow-overlay-large: 0 32px 96px rgb(0 0 0 / 32%), 0 12px 32px rgb(0 0 0 / 20%), 0 0 0 1px rgb(0 0 0 / 8%);
   --cx-shadow-overlay-medium: 0 32px 64px rgb(0 0 0 / 24%);
   --cx-shadow-overlay-small: 0 4px 12px rgb(0 0 0 / 16%);
   --cx-shadow-table-frame: 0 1px 2px rgb(0 0 0 / 10%);

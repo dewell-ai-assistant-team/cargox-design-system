@@ -59,6 +59,9 @@ export const cxToken = {
     size32: "var(--cx-space-size-32)",
     size40: "var(--cx-space-size-40)",
   },
+  shadow: {
+    overlayLarge: "var(--cx-shadow-overlay-large)",
+  },
   radius: {
     xs: "var(--cx-radius-rounded-xs)",
     sm: "var(--cx-radius-rounded-sm)",

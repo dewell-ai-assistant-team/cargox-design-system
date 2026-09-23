@@ -260,3 +260,10 @@ fsense 的检查 harness 会拒绝 submodule 内的未提交源码修改，从�
 设计来源：Figma file `keekWo6ygLKQQw1eNrQYP5`，Components Gallery `5:778`，
 Button `1561:2075`、Input `147:3584`、Checkbox `95:22`、Switch `268:933`、
 Pagination `230:612`、Table `3183:5008`。
+
+### 大型弹窗阴影（0.2.9）
+
+`--cx-shadow-overlay-large` / `cxToken.shadow.overlayLarge` 用于大型浮层与设置窗口，
+以宽范围柔和投影、近距离阴影和边缘轮廓增强与背景的层次区分。
+这是按 Dashboard 的 macOS 窗口参考新增的视觉扩展，不是原 Figma manifest 的采集值。
+小型菜单继续使用原有 overlay-small/medium，不随本次扩展改变。
