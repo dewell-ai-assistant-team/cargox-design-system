@@ -176,6 +176,13 @@ const style = { color: cxToken.content.headingTheme };
 表格关键几何 token 与 Figma 对齐：表头 44px、行 40px、选择列 44px、容器
 圆角 8px、表头 padding 12px、单元格 inline padding 12px。
 
+### Dashboard 量度补充（0.2.8）
+
+运行时新增紧凑字号（10/11/13px）、24px 数值字号、12/14/18/24/26/28/32px 行高、
+紧字距与补充尺寸阶梯，均通过 `cxToken` 和 `--cx-*` 提供。来源是已有 Dashboard
+量度的集中维护，并非新增 Figma 采集结果，因此不改写原始 `figma-token-manifest.json`。
+宿主可将 Tailwind theme 映射到这些变量；页面布局几何（例如弹窗整体宽高）仍由宿主拥有。
+
 ## DataTable
 
 DataTable 不认识 Document API、业务记录类型或本地存储 key；宿主通过泛型

@@ -86,6 +86,32 @@
   --cx-palette-amber-500: #f59e0b;
   --cx-palette-amber-700: #b45309;
 
+  /* 现有 Dashboard 的基础量度补充；非 Figma manifest 原始变量。 */
+  --cx-space-size-14: 14px;
+  --cx-space-size-18: 18px;
+  --cx-space-size-28: 28px;
+  --cx-space-size-36: 36px;
+  --cx-space-size-44: 44px;
+  --cx-space-size-48: 48px;
+  --cx-space-size-56: 56px;
+  --cx-space-size-64: 64px;
+  --cx-space-size-80: 80px;
+  --cx-space-size-96: 96px;
+  --cx-space-size-160: 160px;
+  --cx-space-size-240: 240px;
+  --cx-typography-font-size-100: 10px;
+  --cx-typography-font-size-150: 11px;
+  --cx-typography-font-size-250: 13px;
+  --cx-typography-font-size-600: 24px;
+  --cx-typography-line-space-100: 12px;
+  --cx-typography-line-space-150: 14px;
+  --cx-typography-line-space-250: 18px;
+  --cx-typography-line-space-450: 24px;
+  --cx-typography-line-space-500: 26px;
+  --cx-typography-line-space-550: 28px;
+  --cx-typography-line-space-600: 32px;
+  --cx-typography-letter-space-tight: -0.5px;
+
   --cx-space-size-2: 2px;
   --cx-space-size-4: 4px;
   --cx-space-size-6: 6px;
