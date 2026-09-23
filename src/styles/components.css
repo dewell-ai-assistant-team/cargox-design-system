@@ -1,4 +1,5 @@
 .cx-button,
+.cx-text-button,
 .cx-icon-button,
 .cx-split-button,
 .cx-split-button__action,
@@ -35,6 +36,7 @@
 }
 
 .cx-button:focus-visible,
+.cx-text-button:focus-visible,
 .cx-icon-button:focus-visible,
 .cx-split-button__action:focus-visible,
 .cx-split-button__trigger:focus-visible,
@@ -211,6 +213,107 @@
 .cx-button__icon > svg {
   height: 100%;
   width: 100%;
+}
+
+.cx-text-button {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-radius: var(--cx-radius-rounded-sm);
+  color: var(--cx-content-extensions-brand-blue);
+  cursor: pointer;
+  display: inline-flex;
+  font-weight: var(--cx-typography-font-weight-medium);
+  gap: var(--cx-space-size-4);
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  transition: background 150ms ease, color 150ms ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.cx-text-button--small {
+  font-size: var(--cx-typography-font-size-200);
+  height: var(--cx-space-size-20);
+  line-height: var(--cx-typography-line-space-200);
+  padding: var(--cx-space-size-2) var(--cx-space-size-6);
+}
+
+.cx-text-button--large {
+  font-size: var(--cx-typography-font-size-300);
+  height: var(--cx-space-size-28);
+  line-height: var(--cx-typography-line-space-300);
+  padding: var(--cx-space-size-4) var(--cx-space-size-6);
+}
+
+.cx-text-button:hover:not(:disabled) {
+  background: var(--cx-brand-50);
+}
+
+.cx-text-button:active:not(:disabled) {
+  background: var(--cx-background-surface-extension-blue);
+}
+
+.cx-text-button--default:focus-visible:not(:disabled) {
+  background: var(--cx-background-surface-extension-blue);
+}
+
+.cx-text-button:disabled {
+  background: transparent;
+  border: 0;
+  color: var(--cx-border-secondary);
+  cursor: not-allowed;
+}
+
+.cx-text-button__icon {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  line-height: 1;
+}
+
+.cx-text-button--small .cx-text-button__icon {
+  height: var(--cx-space-size-16);
+  width: var(--cx-space-size-16);
+}
+
+.cx-text-button--large .cx-text-button__icon {
+  height: var(--cx-space-size-20);
+  width: var(--cx-space-size-20);
+}
+
+.cx-text-button__icon > img,
+.cx-text-button__icon > svg {
+  height: 100%;
+  width: 100%;
+}
+
+.cx-text-button--ai {
+  background: var(--cx-color-style-ai-gradient-background);
+}
+
+.cx-text-button--ai:hover:not(:disabled) {
+  background: var(--cx-color-style-ai-gradient-background-hover);
+}
+
+.cx-text-button--ai:active:not(:disabled) {
+  background: var(--cx-color-style-ai-gradient-background-pressed);
+}
+
+.cx-text-button--ai .cx-text-button__label {
+  background: var(--cx-color-style-ai-gradient-text);
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cx-text-button:disabled .cx-text-button__label {
+  background: none;
+  color: var(--cx-border-secondary);
+  -webkit-text-fill-color: currentColor;
 }
 
 .cx-icon-button {

@@ -34,6 +34,16 @@ export const cxToken = {
     success: "var(--cx-border-extensions-success)",
     danger: "var(--cx-border-extensions-danger)",
   },
+  colorStyle: {
+    aiGradientText: "var(--cx-color-style-ai-gradient-text)",
+    aiGradientTextStart: "var(--cx-color-style-ai-gradient-text-start)",
+    aiGradientTextEnd: "var(--cx-color-style-ai-gradient-text-end)",
+    aiGradientBackground: "var(--cx-color-style-ai-gradient-background)",
+    aiGradientBackgroundHover:
+      "var(--cx-color-style-ai-gradient-background-hover)",
+    aiGradientBackgroundPressed:
+      "var(--cx-color-style-ai-gradient-background-pressed)",
+  },
   space: {
     size14: "var(--cx-space-size-14)",
     size18: "var(--cx-space-size-18)",

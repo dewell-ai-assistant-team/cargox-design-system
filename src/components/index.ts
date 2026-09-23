@@ -1,5 +1,6 @@
 export * from "./Badge";
 export * from "./Button";
+export * from "./TextButton";
 export * from "./Checkbox";
 export * from "./DataTable";
 export * from "./Input";

@@ -171,6 +171,30 @@
   --cx-color-style-error-state-background: #f9e9ec;
   --cx-color-style-error-state-content: #c8313a;
 
+  /* Figma COLOR STYLE「AI Gradient」；交互态透明度是组件的派生值。 */
+  --cx-color-style-ai-gradient-text-start: rgb(32 95 223 / 80%);
+  --cx-color-style-ai-gradient-text-end: #705bfb;
+  --cx-color-style-ai-gradient-text: linear-gradient(
+    180deg,
+    var(--cx-color-style-ai-gradient-text-start),
+    var(--cx-color-style-ai-gradient-text-end)
+  );
+  --cx-color-style-ai-gradient-background: linear-gradient(
+    180deg,
+    rgb(32 95 223 / 8%),
+    rgb(112 91 251 / 10%)
+  );
+  --cx-color-style-ai-gradient-background-hover: linear-gradient(
+    180deg,
+    rgb(32 95 223 / 12%),
+    rgb(112 91 251 / 14%)
+  );
+  --cx-color-style-ai-gradient-background-pressed: linear-gradient(
+    180deg,
+    rgb(32 95 223 / 16%),
+    rgb(112 91 251 / 18%)
+  );
+
   --cx-shadow-surface-small: 0 1px 2px rgb(0 0 0 / 10%);
   --cx-shadow-surface-medium: 0 0 8px rgb(0 0 0 / 20%);
   --cx-shadow-overlay-large: 0 32px 96px rgb(0 0 0 / 32%), 0 12px 32px rgb(0 0 0 / 20%), 0 0 0 1px rgb(0 0 0 / 8%);
