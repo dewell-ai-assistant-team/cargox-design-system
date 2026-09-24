@@ -94,7 +94,6 @@ export function FilterButton<T extends string = string>({
     >
       <button
         aria-expanded={isOpen}
-        aria-haspopup="menu"
         aria-label={ariaLabel}
         className="cx-filter__trigger"
         data-active={isActive}
