@@ -166,7 +166,7 @@
   cursor: not-allowed;
 }
 
-.cx-filter-option__label {
+.cx-filter-option .cx-checkbox__label {
   min-width: 0;
   padding: 0 var(--cx-space-size-2);
   white-space: nowrap;

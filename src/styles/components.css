@@ -728,6 +728,23 @@
   width: var(--cx-component-checkbox-size);
 }
 
+.cx-checkbox--with-label {
+  display: inline-flex;
+  gap: var(--cx-space-size-4);
+  justify-content: flex-start;
+  width: auto;
+}
+
+.cx-checkbox__label {
+  color: inherit;
+  font: inherit;
+  min-width: 0;
+}
+
+.cx-checkbox--with-label > .cx-checkbox__box {
+  flex: none;
+}
+
 .cx-checkbox--disabled {
   cursor: not-allowed;
 }

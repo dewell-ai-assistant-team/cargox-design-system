@@ -83,6 +83,7 @@ export const Checkbox = forwardRef<HTMLButtonElement, CxCheckboxProps>(
           checked && "cx-checkbox--checked",
           isIntermediate && "cx-checkbox--intermediate",
           disabled && "cx-checkbox--disabled",
+          label !== undefined && "cx-checkbox--with-label",
           className,
         )}
         disabled={disabled}
@@ -100,6 +101,7 @@ export const Checkbox = forwardRef<HTMLButtonElement, CxCheckboxProps>(
           ) : null}
           {isIntermediate ? <span className="cx-checkbox__mark" /> : null}
         </span>
+        {label !== undefined ? <span className="cx-checkbox__label">{label}</span> : null}
       </button>
     );
   },

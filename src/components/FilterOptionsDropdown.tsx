@@ -1,6 +1,6 @@
 import { Checkbox } from "./Checkbox";
 import { cx } from "../utils";
-import { useRef, type ReactNode } from "react";
+import type { ReactNode } from "react";
 
 /** 筛选菜单的一项；受控消费者可以直接提供 checked 与 onChange。 */
 export interface FilterOption<T extends string = string> {
@@ -41,7 +41,6 @@ export function FilterOptionsDropdown<T extends string = string>({
   size = "default",
 }: FilterOptionsDropdownProps<T>) {
   const selectedValueSet = new Set(selectedValues);
-  const checkboxRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   function isOptionChecked(option: FilterOption<T>): boolean {
     return option.checked ?? selectedValueSet.has(option.value);
@@ -68,21 +67,15 @@ export function FilterOptionsDropdown<T extends string = string>({
         const optionIsChecked = isOptionChecked(option);
         const optionLabel = typeof option.label === "string" ? option.label : "filter option";
         return (
-          <div
+          <Checkbox
+            aria-label={`Toggle ${optionLabel}`}
+            checked={optionIsChecked}
             className={cx("cx-filter-option", option.disabled && "cx-filter-option--disabled")}
+            disabled={option.disabled}
             key={option.value}
-            onMouseDown={(event) => {
-              // 点击文字时保留焦点，避免宿主 blur 在 click 前关闭菜单。
-              if (!(event.target as HTMLElement).closest("button")) event.preventDefault();
-            }}
-            onClick={() => {
-              handleOptionClick(option);
-              if (!option.disabled) checkboxRefs.current[option.value]?.focus({ preventScroll: true });
-            }}
-          >
-            <Checkbox aria-label={`Toggle ${optionLabel}`} checked={optionIsChecked} disabled={option.disabled} onCheckedChange={() => handleOptionClick(option)} onClick={(event) => event.stopPropagation()} ref={(element) => { checkboxRefs.current[option.value] = element; }} />
-            <span className="cx-filter-option__label">{option.label}</span>
-          </div>
+            label={option.label}
+            onCheckedChange={() => handleOptionClick(option)}
+          />
         );
       })}
     </div>
