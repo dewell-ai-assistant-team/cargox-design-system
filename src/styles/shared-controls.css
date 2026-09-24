@@ -161,6 +161,11 @@
   background: var(--cx-background-surface-secondary);
 }
 
+.cx-filter-option:focus-visible {
+  outline: 2px solid var(--cx-color-style-focus-state-border);
+  outline-offset: -2px;
+}
+
 .cx-filter-option--disabled {
   color: var(--cx-content-body-tips);
   cursor: not-allowed;

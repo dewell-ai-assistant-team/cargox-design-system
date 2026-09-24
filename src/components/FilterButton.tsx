@@ -42,8 +42,8 @@ export interface FilterButtonProps<T extends string = string> {
 /**
  * CargoX 共享筛选触发器与选项菜单。
  *
- * 单选模式点击选项即关闭菜单并回传当前值；多选模式只维护选项并由
- * 消费者决定何时应用。Escape 只关闭菜单，事件不会向外层弹窗传播。
+ * 默认多选模式只维护选项并由消费者决定何时应用；显式传入
+ * `multiple={false}` 时保留单选行为。Escape 只关闭菜单，事件不会向外层弹窗传播。
  */
 export function FilterButton<T extends string = string>({
   active,
@@ -53,7 +53,7 @@ export function FilterButton<T extends string = string>({
   disabled = false,
   label,
   menuClassName,
-  multiple = false,
+  multiple = true,
   onChange,
   onClear,
   options = [],
@@ -69,6 +69,12 @@ export function FilterButton<T extends string = string>({
   const isActive = active ?? selectedSet.size > 0;
   const triggerRef = useRef<HTMLButtonElement>(null);
 
+  function closeMenu(): void {
+    if (open === undefined) setUncontrolledOpen(false);
+    else onToggle?.();
+    triggerRef.current?.focus({ preventScroll: true });
+  }
+
   return (
     <div
       className={cx("cx-theme", "cx-filter", isActive && "cx-filter--active", className)}
@@ -78,11 +84,10 @@ export function FilterButton<T extends string = string>({
         }
       }}
       onKeyDown={(event) => {
-        if (open === undefined && isOpen && event.key === "Escape") {
+        if (isOpen && event.key === "Escape") {
           event.preventDefault();
           event.stopPropagation();
-          setUncontrolledOpen(false);
-          triggerRef.current?.focus({ preventScroll: true });
+          closeMenu();
         }
       }}
       ref={rootRef}
@@ -130,7 +135,7 @@ export function FilterButton<T extends string = string>({
           )}
         </button>
       ) : null}
-      {isOpen && options.length > 0 ? <FilterOptionsDropdown className={menuClassName} multiple={multiple} onChange={(nextValue, nextSelectedValues) => { onChange?.(nextValue, nextSelectedValues); if (!multiple && open === undefined) { setUncontrolledOpen(false); triggerRef.current?.focus({ preventScroll: true }); } }} options={options} selectedValues={[...selectedSet]} /> : null}
+      {isOpen && options.length > 0 ? <FilterOptionsDropdown className={menuClassName} multiple={multiple} onChange={(nextValue, nextSelectedValues) => { onChange?.(nextValue, nextSelectedValues); if (!multiple) closeMenu(); }} options={options} selectedValues={[...selectedSet]} /> : null}
     </div>
   );
 }
