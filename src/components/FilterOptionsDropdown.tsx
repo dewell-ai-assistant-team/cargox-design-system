@@ -71,6 +71,10 @@ export function FilterOptionsDropdown<T extends string = string>({
           <div
             className={cx("cx-filter-option", option.disabled && "cx-filter-option--disabled")}
             key={option.value}
+            onMouseDown={(event) => {
+              // 点击文字时保留焦点，避免宿主 blur 在 click 前关闭菜单。
+              if (!(event.target as HTMLElement).closest("button")) event.preventDefault();
+            }}
             onClick={() => {
               handleOptionClick(option);
               if (!option.disabled) checkboxRefs.current[option.value]?.focus({ preventScroll: true });
