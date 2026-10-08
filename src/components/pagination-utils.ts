@@ -1,7 +1,7 @@
 /** 分页器中可渲染的页码或省略号。 */
 export type CxPaginationPageToken = number | "ellipsis-start" | "ellipsis-end";
 
-/** 按首尾页与当前页邻近范围生成页码单元。 */
+/** 按当前滚动页码与末尾三页生成页码单元。 */
 export function buildPageTokenList(
   currentPageNumber: number,
   pageCount: number,
@@ -11,42 +11,31 @@ export function buildPageTokenList(
     normalizedPageCount,
     Math.max(1, Math.floor(currentPageNumber)),
   );
-  if (normalizedPageCount <= 7) {
+  if (normalizedPageCount <= 6) {
     return Array.from({ length: normalizedPageCount }, (_, pageIndex) => pageIndex + 1);
   }
 
-  const visiblePageNumbers = new Set([
+  const rollingPageStart = Math.max(
     1,
-    2,
-    3,
-    currentPage - 1,
-    currentPage,
-    currentPage + 1,
-    normalizedPageCount - 2,
-    normalizedPageCount - 1,
-    normalizedPageCount,
-  ]);
-  const sortedPageNumbers = [...visiblePageNumbers]
-    .filter((pageNumber) => pageNumber >= 1 && pageNumber <= normalizedPageCount)
-    .sort((firstPageNumber, secondPageNumber) => firstPageNumber - secondPageNumber);
+    Math.min(currentPage - 1, normalizedPageCount - 2),
+  );
+  const rollingPageEnd = rollingPageStart + 2;
+  const lastPageStart = normalizedPageCount - 2;
   const pageTokens: CxPaginationPageToken[] = [];
 
-  for (let pageIndex = 0; pageIndex < sortedPageNumbers.length; pageIndex += 1) {
-    const pageNumber = sortedPageNumbers[pageIndex];
-    if (pageNumber === undefined) {
-      continue;
-    }
-    const previousPageNumber = sortedPageNumbers[pageIndex - 1];
-    if (previousPageNumber !== undefined) {
-      const missingPageCount = pageNumber - previousPageNumber - 1;
-      if (missingPageCount === 1) {
-        pageTokens.push(previousPageNumber + 1);
-      } else if (missingPageCount >= 2) {
-        pageTokens.push(
-          pageNumber < currentPage ? "ellipsis-start" : "ellipsis-end",
-        );
-      }
-    }
+  for (let pageNumber = rollingPageStart; pageNumber <= rollingPageEnd; pageNumber += 1) {
+    pageTokens.push(pageNumber);
+  }
+
+  if (rollingPageEnd < lastPageStart - 1) {
+    pageTokens.push("ellipsis-end");
+  }
+
+  for (
+    let pageNumber = Math.max(lastPageStart, rollingPageEnd + 1);
+    pageNumber <= normalizedPageCount;
+    pageNumber += 1
+  ) {
     pageTokens.push(pageNumber);
   }
 
