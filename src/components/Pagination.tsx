@@ -14,6 +14,9 @@ import { buildPageTokenList } from "./pagination-utils";
 
 export { buildPageTokenList, type CxPaginationPageToken } from "./pagination-utils";
 
+/** CargoX Pagination 的展示模式。 */
+export type CxPaginationVariant = "full" | "no-page-size" | "basic";
+
 /** CargoX Pagination 的公共属性。 */
 export interface CxPaginationProps {
   /** 当前页，从 1 开始。 */
@@ -24,6 +27,8 @@ export interface CxPaginationProps {
   onPageChange: (pageNumber: number) => void;
   /** 左侧总数或记录范围文案。 */
   totalLabel?: string;
+  /** 展示模式；未指定时沿用旧 showPageSize/showJumpTo/pageSizeLabel 属性。 */
+  variant?: CxPaginationVariant;
   /** 是否展示页大小选择器。提供 fsense 页大小属性时也会自动展示。 */
   showPageSize?: boolean;
   /** 页大小选项，默认 [10, 20, 50]。 */
@@ -56,6 +61,7 @@ export function Pagination({
   showJumpTo = false,
   showPageSize = false,
   totalLabel,
+  variant,
 }: CxPaginationProps) {
   const normalizedPageCount = Math.max(1, Math.floor(pageCount));
   const normalizedCurrentPage = Math.min(
@@ -70,7 +76,14 @@ export function Pagination({
     [normalizedCurrentPage, normalizedPageCount],
   );
   const canChoosePageSize = pageSizeOptionList.length > 0 && Boolean(onPageSizeChange);
-  const shouldShowPageSize = showPageSize || Boolean(pageSizeLabel);
+  const shouldShowPageSize =
+    variant === undefined
+      ? showPageSize || Boolean(pageSizeLabel)
+      : variant === "full";
+  const shouldShowJumpTo =
+    variant === undefined
+      ? showJumpTo
+      : variant === "full" || variant === "no-page-size";
   const currentPageSize = pageSize ?? Number.parseInt(pageSizeLabel ?? "", 10);
 
   useEffect(() => {
@@ -132,7 +145,7 @@ export function Pagination({
               onClick={() => setIsPageSizeMenuOpen((isOpen) => !isOpen)}
               type="button"
             >
-              <span>{pageSizeLabel ?? `${pageSizeOptionList[0] ?? ""}/Page`}</span>
+              <span>{pageSizeLabel ?? `${pageSize ?? pageSizeOptionList[0] ?? ""}/Page`}</span>
               <img alt="" aria-hidden="true" src={paginationChevronDownIcon} />
             </button>
             {isPageSizeMenuOpen && canChoosePageSize ? (
@@ -201,7 +214,7 @@ export function Pagination({
         </button>
       </div>
 
-      {showJumpTo ? (
+      {shouldShowJumpTo ? (
         <form className="cx-pagination__jump" onSubmit={submitJumpPage}>
           <label htmlFor="cx-pagination-go-to-page">{jumpToLabel}</label>
           <input

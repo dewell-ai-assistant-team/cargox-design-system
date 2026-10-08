@@ -183,6 +183,33 @@ const style = { color: cxToken.content.headingTheme };
 量度的集中维护，并非新增 Figma 采集结果，因此不改写原始 `figma-token-manifest.json`。
 宿主可将 Tailwind theme 映射到这些变量；页面布局几何（例如弹窗整体宽高）仍由宿主拥有。
 
+## Pagination
+
+`variant` 可在截图适配时选择分页控件的展示密度；三种模式共用相同的页码规则：保留首尾各三页和当前页前后一页，单页缺口会展开为页码，较大的缺口才显示省略号。
+`totalLabel` 在所有模式中保持显示。
+
+```tsx
+const paginationProps = {
+  currentPageNumber,
+  pageCount,
+  onPageChange: setCurrentPage,
+  totalLabel: "1-20 of 285",
+};
+
+<Pagination
+  {...paginationProps}
+  variant="full"
+  pageSize={pageSize}
+  onPageSizeChange={setPageSize}
+/>
+<Pagination {...paginationProps} variant="no-page-size" />
+<Pagination {...paginationProps} variant="basic" />
+```
+
+`full` 显示页大小选择器和跳页输入框；`no-page-size` 只显示跳页输入框；`basic`
+隐藏这两项。未设置 `variant` 时，继续由 `showPageSize`、`showJumpTo` 和
+`pageSizeLabel` 控制旧行为；显式设置 `variant` 后，它优先决定这两项的可见性。
+
 ## DataTable
 
 DataTable 不认识 Document API、业务记录类型或本地存储 key；宿主通过泛型
