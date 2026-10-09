@@ -16,6 +16,100 @@
   font-family: var(--cx-typography-font-family-sans);
 }
 
+/* Tooltip — Figma 618:3203 / 3086:4543. CSS arrows inherit the surface color. */
+.cx-tooltip {
+  background: var(--cx-background-surface-primary);
+  border-radius: var(--cx-radius-rounded-sm);
+  box-sizing: border-box;
+  color: var(--cx-content-body-primary);
+  display: flex;
+  filter: var(--cx-filter-tooltip-shadow);
+  font-family: var(--cx-typography-font-family-sans);
+  font-size: var(--cx-typography-font-size-200);
+  font-weight: var(--cx-typography-font-weight-regular);
+  line-height: var(--cx-typography-line-space-200);
+  max-width: min(240px, calc(100vw - 16px));
+  padding: var(--cx-space-size-8) var(--cx-space-size-12);
+  position: relative;
+  text-align: start;
+  white-space: pre-line;
+  width: max-content;
+  z-index: 1000;
+}
+
+.cx-tooltip--dark {
+  background: var(--cx-background-surface-primary-dark);
+  color: var(--cx-content-body-inverse);
+}
+
+.cx-tooltip__label {
+  display: block;
+  max-width: 216px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.cx-tooltip__arrow {
+  background: inherit;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  height: 8px;
+  pointer-events: none;
+  position: absolute;
+  width: 16px;
+}
+
+.cx-tooltip[data-arrow-position^="above"] .cx-tooltip__arrow {
+  /* Overlap by 1px to keep the triangle joined at fractional coordinates. */
+  top: -7px;
+}
+
+.cx-tooltip[data-arrow-position^="below"] .cx-tooltip__arrow {
+  bottom: -7px;
+  transform: rotate(180deg);
+}
+
+.cx-tooltip[data-arrow-position$="-start"] .cx-tooltip__arrow {
+  left: 16px;
+}
+
+.cx-tooltip[data-arrow-position$="-end"] .cx-tooltip__arrow {
+  right: 16px;
+}
+
+.cx-tooltip[data-arrow-position="above-center"] .cx-tooltip__arrow,
+.cx-tooltip[data-arrow-position="below-center"] .cx-tooltip__arrow {
+  left: calc(50% - 7.5px);
+}
+
+.cx-tooltip[data-arrow-position^="before"] .cx-tooltip__arrow,
+.cx-tooltip[data-arrow-position^="after"] .cx-tooltip__arrow {
+  height: 16px;
+  width: 8px;
+}
+
+.cx-tooltip[data-arrow-position^="before"] .cx-tooltip__arrow {
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  left: -7px;
+}
+
+.cx-tooltip[data-arrow-position^="after"] .cx-tooltip__arrow {
+  clip-path: polygon(100% 50%, 0 100%, 0 0);
+  right: -7px;
+}
+
+.cx-tooltip[data-arrow-position$="-top"] .cx-tooltip__arrow {
+  top: 8px;
+}
+
+.cx-tooltip[data-arrow-position$="-bottom"] .cx-tooltip__arrow {
+  bottom: 8px;
+}
+
+.cx-tooltip[data-arrow-position="before-center"] .cx-tooltip__arrow,
+.cx-tooltip[data-arrow-position="after-center"] .cx-tooltip__arrow {
+  top: calc(50% - 8px);
+}
+
 .cx-button {
   align-items: center;
   border: 1px solid transparent;

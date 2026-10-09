@@ -10,6 +10,7 @@
   --cx-background-canvas-primary: #fafafa;
   --cx-background-canvas-tertiary: #f2f2f2;
   --cx-background-surface-primary: #ffffff;
+  --cx-background-surface-primary-dark: #1a1a1a;
   --cx-background-surface-secondary: #f7f7f7;
   --cx-background-surface-tertiary: #e6e6e6;
   --cx-background-surface-extension-blue: #e2edfc;
@@ -200,6 +201,7 @@
   --cx-shadow-overlay-large: 0 32px 96px rgb(0 0 0 / 32%), 0 12px 32px rgb(0 0 0 / 20%), 0 0 0 1px rgb(0 0 0 / 8%);
   --cx-shadow-overlay-medium: 0 32px 64px rgb(0 0 0 / 24%);
   --cx-shadow-overlay-small: 0 4px 12px rgb(0 0 0 / 16%);
+  --cx-filter-tooltip-shadow: drop-shadow(0 4px 4px rgb(0 0 0 / 14%)) drop-shadow(0 0 1px rgb(0 0 0 / 12%));
   --cx-shadow-table-frame: 0 1px 2px rgb(0 0 0 / 10%);
   --cx-shadow-focus-control: 0 0 0 2px rgb(49 108 228 / 28%);
   --cx-shadow-drag-column: 0 4px 12px rgb(0 0 0 / 16%);

@@ -2,7 +2,7 @@
 
 CargoX 的 React + TypeScript 设计系统包。它把 Figma Components Gallery 的
 tokens 与可复用控件抽成独立发布单元，当前包含 Button、IconButton、SplitButton、
-Input、Checkbox、Switch、Badge、Pagination、Select、SelectTrigger 和泛型 DataTable。
+Input、Checkbox、Switch、Badge、Pagination、Select、SelectTrigger、Tooltip 和泛型 DataTable。
 
 ## 安装与样式隔离
 
@@ -137,6 +137,40 @@ export function TransportTypeField() {
 
 组件不拥有业务 `options`、`open` 或 `value`，也不渲染 portal；宿主可以按页面需要
 组合菜单、blur 和业务同步逻辑。
+
+### Tooltip
+
+`Tooltip` 对应 [Figma Tooltip](https://www.figma.com/design/keekWo6ygLKQQw1eNrQYP5/Design-System?node-id=618-3203)：
+明暗两种主题、12px/16px 正文、8×12px 内边距、4px 圆角和最大 240px 内容表面。
+默认暗色、上方显示；支持悬停延迟、键盘焦点、Escape 关闭、悬停到内容保持、
+边界自动翻转以及 portal，避免被宿主 overflow 裁剪。
+
+```tsx
+import { Button, Tooltip, TooltipContent } from "@cargox/design-system";
+
+<Tooltip content="识别当前文档中的内容" theme="dark" placement="top">
+  <Button>AI Vision</Button>
+</Tooltip>
+
+// 外部已控制定位或需要静态展示时，可单独使用视觉表面。
+<TooltipContent theme="light" arrowPosition="above-start">
+  提示内容
+</TooltipContent>
+```
+
+`Tooltip` 接收单个能传递 ref 和事件的触发元素，支持
+`open/defaultOpen/onOpenChange`、`delay`（默认 300ms）、`arrow` 和 `disabled`。
+原生 disabled 控件或传入 disabled 属性的 Button 会使用可聚焦的 span 作为触发区。
+触发元素已有的事件、ref 与 `aria-describedby` 会保留。提示只放说明文字；
+按钮、链接等可交互内容应使用 Popover，而不是 Tooltip。
+
+`TooltipContent.arrowPosition` 与 Figma 对应，使用小写 kebab-case：
+`above/below-start/center/end`、`before/after-top/center/bottom` 或 `none`。
+箭头位置描述的是箭头所在表面边缘；Tooltip 的 `placement` 描述浮层相对触发元素的位置。
+因此 `placement="top"` 会使用底边箭头，并随着边界翻转更新。
+箭头使用统一 CSS 三角形，直接继承主体背景色；自定义主题时同步变色，无需图像资源。
+
+本地示例：`npx vite --host 127.0.0.1`，打开 `/examples/tooltip/index.html`。
 
 所有 CSS 类都使用 `cx-` 前缀，token 只声明在 `.cx-theme` 或
 `[data-cx-theme]` 范围内；包不写 `:root`、全局元素选择器或 reset。每个

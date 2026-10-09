@@ -1,0 +1,9 @@
+body { margin: 0; background: #f7f7f7; font-family: Inter, sans-serif; }
+main { max-width: 1000px; margin: 64px auto; padding: 32px; }
+h1 { margin: 0; font-size: 32px; }
+h2 { font-size: 20px; }
+.actions { display: flex; gap: 16px; padding: 32px 0; }
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; padding: 32px; background: white; }
+.slot { padding: 8px; }
+.clipped { overflow: hidden; width: 180px; height: 36px; }
+.edge { position: fixed; top: 0; right: 24px; }

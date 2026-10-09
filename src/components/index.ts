@@ -13,3 +13,4 @@ export * from "./FilterButton";
 export * from "./FilterOptionsDropdown";
 export * from "./DateFilterDropdown";
 export * from "./Sortable";
+export * from "./Tooltip";

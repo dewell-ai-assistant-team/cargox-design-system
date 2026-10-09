@@ -19,6 +19,7 @@ export default defineConfig({
         "react-dom",
         "react/jsx-runtime",
         "react/jsx-dev-runtime",
+        "@floating-ui/react",
         "@dnd-kit/core",
         "@dnd-kit/sortable",
         "@dnd-kit/utilities",

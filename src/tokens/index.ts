@@ -5,6 +5,7 @@ export const cxToken = {
     canvasNeutral: "var(--cx-background-canvas-neutral)",
     canvasPrimary: "var(--cx-background-canvas-primary)",
     surfacePrimary: "var(--cx-background-surface-primary)",
+    surfacePrimaryDark: "var(--cx-background-surface-primary-dark)",
     surfaceSecondary: "var(--cx-background-surface-secondary)",
     surfaceTertiary: "var(--cx-background-surface-tertiary)",
     inputDefault: "var(--cx-background-inputs-default)",
@@ -70,6 +71,7 @@ export const cxToken = {
     size40: "var(--cx-space-size-40)",
   },
   shadow: {
+    tooltipFilter: "var(--cx-filter-tooltip-shadow)",
     overlayLarge: "var(--cx-shadow-overlay-large)",
   },
   radius: {
